@@ -16,8 +16,8 @@ library(lubridate)
 
 # 1 - Model input
 # These are the variables that should be coming from the user
-input_demand <- 100
-input_product <- "carrot"
+input_demand <- 10000
+input_product <- "salad"
 input_localisation <- "Louvain-la-Neuve" # Might need to have a gps coordinates here
 input_time <- "december"
 input_production_mode <- "organic"
@@ -42,7 +42,12 @@ impacts <- NULL
 production_impacts <- NULL
 
 # 4 - Other variables
+
 months <- c("january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december")
+
+
+
+
 
 ########################################
 # Load the database tables
@@ -78,7 +83,9 @@ production_data <- merge(production_data, production_modes, by.x = "id_mode", by
   mutate(name_mode = name) %>% 
   select(-name)
 
+
 # Get the monthly production
+# ATTENTION HYPOTHESE -> LA PRODUCTION EST EQUIVALENTE SUR LES MOIS DE RECOLTE
 production_data <- production_data %>% 
   mutate(monthly_quantity = quantity / (stop_harvest - start_harvest))
 
@@ -89,6 +96,7 @@ production_data <- production_data %>%
 ########################################
 
 get_production <- function(product, time, locality, mode){
+  
   time_num <- which(months == time) # the month of interest, in number
   
   # get the specifi production for the given product
@@ -105,7 +113,7 @@ get_production <- function(product, time, locality, mode){
     filter(name_mode == mode)
   
   if(nrow(specific_production) == 0){
-    print("Sorry no production for that mode of production in the database")
+    print("Sorry no data for that mode of production in the database")
     return(NULL) # get out of the function
   }
 
@@ -114,7 +122,7 @@ get_production <- function(product, time, locality, mode){
     filter(name_locality == locality)
   
   if(nrow(specific_production) == 0){
-    print("Sorry no production for that locality in the database")
+    print("Sorry no data for that locality in the database")
     return(NULL) # get out of the function
   }
     
@@ -134,17 +142,22 @@ get_production <- function(product, time, locality, mode){
 
 # Testing the error messages from the function
 get_production(product = "potato", time = input_time, locality = "bw", mode = input_production_mode)
+
 get_production(product = input_product, time = "march", locality = "bw", mode = input_production_mode)
+
 get_production(product = input_product, time = input_time, locality = "bw", mode = "rationned")
+
 get_production(product = input_product, time = input_time, locality = "bxl", mode = input_production_mode)
+
+
+# TODO get_impact()
+
 
 
 
 ########################################
 # RUN THEN MODEL
 ########################################
-
-
 
 offer <- get_production(product = input_product, time = input_time, locality = "bw", mode = input_production_mode)
 
@@ -157,6 +170,12 @@ if(offer > input_demand){
 
 
 
+
+########################################
+# OUTPUT OF THE MODEL
+########################################
+
+# TODO reflechir aux output graphiques
 
 
 
