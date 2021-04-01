@@ -164,7 +164,7 @@ offer <- get_production(product = input_product, time = input_time, locality = "
 if(offer > input_demand){
   print(paste0("there is enough. Current offer is ",offer," while the demand is ",input_demand))
 }else{
-  print("there is not enough")
+  print("there is not enough. Please try again")
  # Should look for production elsewhere
 }
 
