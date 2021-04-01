@@ -164,7 +164,11 @@ offer <- get_production(product = input_product, time = input_time, locality = "
 if(offer > input_demand){
   print(paste0("there is enough. Current offer is ",offer," while the demand is ",input_demand))
 }else{
+<<<<<<< HEAD
   print("there is not enough. ")
+=======
+  print("there is not enough")
+>>>>>>> parent of a8fb135 (Update exmple_model.R)
  # Should look for production elsewhere
 }
 
