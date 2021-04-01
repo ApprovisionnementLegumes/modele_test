@@ -16,7 +16,7 @@ library(lubridate)
 
 # 1 - Model input
 # These are the variables that should be coming from the user
-input_demand <- 10000
+input_demand <- 5000
 input_product <- "salad"
 input_localisation <- "Louvain-la-Neuve" # Might need to have a gps coordinates here
 input_time <- "december"
@@ -164,7 +164,7 @@ offer <- get_production(product = input_product, time = input_time, locality = "
 if(offer > input_demand){
   print(paste0("there is enough. Current offer is ",offer," while the demand is ",input_demand))
 }else{
-  print("there is not enough. Please try again")
+  print("there is not enough. ")
  # Should look for production elsewhere
 }
 
