@@ -11,6 +11,8 @@ library(lubridate)
 
 # Nouveau commentaire
 
+# Nouveau commentaire bis
+
 ########################################
 # Variable definitions
 ########################################
