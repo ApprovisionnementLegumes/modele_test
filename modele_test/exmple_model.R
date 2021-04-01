@@ -9,6 +9,8 @@ library(tidyverse)
 library(readxl)
 library(lubridate)
 
+# Nouveau commentaire
+
 ########################################
 # Variable definitions
 ########################################
